@@ -12,6 +12,20 @@ Fall 2014
 
 int ROWS,COLS;
 
+void gameLogic();
+void PVP(char [][COLS],char [],int [],int );
+void PVC(char [][COLS],char [],int [],int );
+void printBoard(char [][COLS]);
+int playTurnPVP(char [][COLS],int [],int ,char []);
+int playTurnPVC(char [][COLS],int [],int ,char []);
+int checkFour(char [][COLS],char ,int ,int ,int ,int ,int ,int ,int ,int );
+int checkX(char [][COLS]);
+int checkO(char [][COLS]);
+void saveGame(char [][COLS],int );
+void loadGame(char [][COLS], char [16]);
+int startGameChecker(char [][COLS],int []);
+int computerEasy();
+
 int main()
 {
     gameLogic();
@@ -21,8 +35,7 @@ int main()
     return 0;
 }
 
-void gameLogic()
-{
+void gameLogic(){
     printf("     ____   U  ___ u  _   _     _   _  U  _____  u   ____   _____      _  _\n"
            " U  /\"___|   \\/\"_ \\/ | \\ |\"|   | \\ |\"|  \\| ___\"|/ U /\"___| |_ \" _|    | ||\"|\n"
            "  \\| | u     | | | |<|  \\| |> <|  \\| |>  |  _|\"   \\| | u     | |      | || |_\n"
@@ -101,8 +114,7 @@ void gameLogic()
     }
 
 }
-void PVP(char board[][COLS],char pieces[],int emptyFlag[],int availMoves)
-{
+void PVP(char board[][COLS],char pieces[],int emptyFlag[],int availMoves){
     int turn;
     for(turn=0; turn<(ROWS*COLS-availMoves); turn++){
         printBoard(board);
@@ -114,8 +126,7 @@ void PVP(char board[][COLS],char pieces[],int emptyFlag[],int availMoves)
     printBoard(board);
 }
 
-void PVC(char board[][COLS],char pieces[],int emptyFlag[],int availMoves)
-{
+void PVC(char board[][COLS],char pieces[],int emptyFlag[],int availMoves){
     int turn;
     for(turn=0; turn<(ROWS*COLS-availMoves); turn++){
         printBoard(board);
@@ -128,8 +139,7 @@ void PVC(char board[][COLS],char pieces[],int emptyFlag[],int availMoves)
     printBoard(board);
 }
 
-void printBoard(char board[][COLS])
-{
+void printBoard(char board[][COLS]){
     int i, j,count=0;
     system("CLS");
     printf("\n****Connect Four****\n\nYou can enter (0) to save game.\n\n");
@@ -149,8 +159,7 @@ void printBoard(char board[][COLS])
     printf("\n\nScore(X): %d\tScore(O): %d\n\n",checkX(board),checkO(board));
 }
 
-int playTurnPVP(char board[][COLS],int emptyFlag[],int player,char pieces[])
-{
+int playTurnPVP(char board[][COLS],int emptyFlag[],int player,char pieces[]){
     int column,row;
     printf("Player %d (%c), Enter number of column <%d-%d>: ",player+1,pieces[player],1,COLS);
     do{
@@ -168,8 +177,7 @@ int playTurnPVP(char board[][COLS],int emptyFlag[],int player,char pieces[])
     return 0;
 }
 
-int playTurnPVC(char board[][COLS],int emptyFlag[],int player,char pieces[])
-{
+int playTurnPVC(char board[][COLS],int emptyFlag[],int player,char pieces[]){
     int column,row;
     if(player == 0){
         printf("Player 1 (X), Enter number of column <%d-%d>: ",1,COLS);
@@ -192,13 +200,11 @@ int playTurnPVC(char board[][COLS],int emptyFlag[],int player,char pieces[])
     return 0;
 }
 
-int checkFour(char board[][COLS],char c,int x1,int y1,int x2,int y2,int x3,int y3,int x4,int y4)
-{
+int checkFour(char board[][COLS],char c,int x1,int y1,int x2,int y2,int x3,int y3,int x4,int y4){
     return (board[x1][y1] == c && board[x1][y1] == board[x2][y2] && board[x2][y2] == board[x3][y3] && board[x3][y3] == board[x4][y4]);
 }
 
-int checkX(char board[][COLS])
-{
+int checkX(char board[][COLS]){
     int i,j,count=0;
     // RIGHT DIAGONAL CHECK
     for(i=0; i<ROWS-3; i++)
@@ -223,8 +229,7 @@ int checkX(char board[][COLS])
     return count;
 }
 
-int checkO(char board[][COLS])
-{
+int checkO(char board[][COLS]){
     int i,j,count=0;
     // RIGHT DIAGONAL CHECK
     for(i=0; i<ROWS-3; i++)
@@ -249,8 +254,7 @@ int checkO(char board[][COLS])
     return count;
 }
 
-void saveGame(char board[][COLS],int mode)
-{
+void saveGame(char board[][COLS],int mode){
     int i,j;
     fflush(stdin);
     char fileName[16];
@@ -269,8 +273,7 @@ void saveGame(char board[][COLS],int mode)
     printf("Board saved.\n");
 }
 
-void loadGame(char board[][COLS], char fileName[16])
-{
+void loadGame(char board[][COLS], char fileName[16]){
     int i,j,g3;
     fflush(stdin);
     if(fileName == NULL){
@@ -293,8 +296,7 @@ void loadGame(char board[][COLS], char fileName[16])
     fclose(f);
 }
 
-int startGameChecker(char board[][COLS],int emptyFlag[])
-{
+int startGameChecker(char board[][COLS],int emptyFlag[]){
     int i,j,count=0;
     for(i=0;i<ROWS;i++)
         for(j=0;j<COLS;j++)
@@ -305,8 +307,7 @@ int startGameChecker(char board[][COLS],int emptyFlag[])
     return count;
 }
 
-int computerEasy()
-{
+int computerEasy(){
     srand(time(0));
     printf("Computer's turn...");
     Sleep(500);
