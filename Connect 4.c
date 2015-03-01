@@ -142,7 +142,7 @@ void PVC(char board[][COLS],char pieces[],int emptyFlag[],int availMoves){
 void printBoard(char board[][COLS]){
     int i, j,count=0;
     system("CLS");
-    printf("\n****Connect Four****\n\nYou can enter (0) to save game.\n\n");
+    printf("\n****Connect Four****\n\nYou can enter (0) to save game.\nYou can enter (-1) to exit game.\n\n");
     for(i=0; i<4*COLS+1; i++)
         printf("-");
     printf("\n");
