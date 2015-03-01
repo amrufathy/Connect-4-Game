@@ -166,6 +166,8 @@ int playTurnPVP(char board[][COLS],int emptyFlag[],int player,char pieces[]){
         scanf("%d",&column);
         if (column == 0)
             saveGame(board,1);
+        else if (column == -1)
+            exit(0);
     }while(column<1 || column>COLS);
     column--;
     if(emptyFlag[column] > 0){
@@ -185,6 +187,8 @@ int playTurnPVC(char board[][COLS],int emptyFlag[],int player,char pieces[]){
             scanf("%d",&column);
             if (column == 0)
                 saveGame(board,2);
+            else if (column == -1)
+                exit(0);
         }while(column<1 || column>COLS);
     }
     else
